@@ -6,7 +6,6 @@ const Repos = ({ userRepos }: { userRepos: any }) => {
   const { created_at } = userRepos;
   const [recentRepos, setRecentRepos] = useState([]);
   const [sortType, setSortType] = useState('created');
-  console.log('userRepos', userRepos);
 
   const getRecentRepos = (type: any) => {
     const LIMIT = 8;
@@ -27,24 +26,35 @@ const Repos = ({ userRepos }: { userRepos: any }) => {
 
   useEffect(() => getRecentRepos(sortType), [sortType]);
 
-  console.log('recentRepos', recentRepos);
-
   return (
-    <div className="mt-5 flex-col justify-center">
+    <div className="mt-5 mb-8 flex-col justify-center">
       <div className="my-5 flex justify-center">
-        <h1>My Recent Repos</h1>
+        <h1 className="text-1xl md:text-2xl">Some Random Repos Of Mine</h1>
       </div>
-      <div className="flex flex-col items-center justify-center space-x-3 space-y-3 md:flex-row md:flex-wrap">
+      <div className="mt-5 flex flex-col justify-center md:flex-row md:flex-wrap">
         {recentRepos.map((repo: any) => (
           <div
-            className="flex w-80 flex-col rounded-md border-[1px] border-[#ff7f50] p-1 shadow-lg"
+            className="mb-5 flex h-36 w-80 flex-col rounded-md border-[1px] border-[#ff7f50] p-2 shadow-lg md:mr-5"
             key={repo.id}
           >
             <div className="flex items-center space-x-2">
-              <VscRepo /> <h1>{repo.name}</h1>
+              <VscRepo />
+              <a
+                href={`${repo.html_url}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cursor-pointer"
+              >
+                {' '}
+                <h1>{repo.name}</h1>
+              </a>
             </div>
-            <div className="my-2">
+            <div className="my-3">
               <p>{repo.description}</p>
+            </div>
+            <div className="mt-7 flex justify-between">
+              <div>{repo.language}</div>
+              <div>{repo.size} KB</div>
             </div>
           </div>
         ))}

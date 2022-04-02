@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import GhPolyglot from 'gh-polyglot';
 
-import { Hero } from '../components';
-import { Stats } from '../components';
-import { Repos } from '../components';
+import { Hero, Stats, Repos, Footer } from '../components';
 
 const User = () => {
   const [userData, setUserData] = useState(null);
@@ -71,6 +69,7 @@ const User = () => {
       {userData && <Hero userData={userData} />}
       {langData && <Stats langData={langData} />}
       {userRepos && <Repos userRepos={userRepos} />}
+      <Footer />
     </main>
   );
 };
